@@ -19,7 +19,7 @@ class BasicSimulation extends Simulation { // 3
       .get("/")) // 9
 
   setUp(
-    scn.inject(4
+    scn.inject(
       rampUsersPerSec(0) to 200 during (60 seconds), // 6
       constantUsersPerSec(200) during (15 minutes) randomized, // 5
     ).protocols(httpProtocol)

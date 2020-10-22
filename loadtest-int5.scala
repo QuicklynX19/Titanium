@@ -20,8 +20,8 @@ class Titanium extends Simulation { // 3
 
   setUp(
     scn.inject(
-      rampUsersPerSec(0) to 75 during (60 seconds), // 6
-      constantUsersPerSec(100) during (120 seconds) randomized, // 5
+      rampUsersPerSec(0) to 500 during (10 minutes), // 6
+      constantUsersPerSec(1000) during (3 minutes) randomized, // 5
     ).protocols(httpProtocol)
   )
 }

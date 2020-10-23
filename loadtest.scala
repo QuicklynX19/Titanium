@@ -8,7 +8,7 @@ import io.gatling.http.Predef._
 class Titanium extends Simulation { // 3
 
   val httpProtocol = http // 4
-    .baseUrl("https://180-dot-apnews-int.appspot.com/") // 5
+    .baseUrl("https://185-dot-apnews-int.appspot.com/") // 5
     .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // 6
     .acceptLanguageHeader("en-US,en;q=0.5")
     .acceptEncodingHeader("gzip, deflate")

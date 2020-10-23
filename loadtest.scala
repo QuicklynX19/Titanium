@@ -1,25 +1,27 @@
-package default
+package default // 1
 
 import scala.concurrent.duration._
 
-import io.gatling.core.Predef._
+import io.gatling.core.Predef._ // 2
 import io.gatling.http.Predef._
-import io.gatling.jdbc.Predef._
 
-class Titanium extends Simulation {
+class Titanium extends Simulation { // 3
 
-        val web = http
-                .baseUrl("https://apnews-int.appspot.com")
-                .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-                .acceptLanguageHeader("en-US,en;q=0.5")
-                .acceptEncodingHeader("gzip, deflate")
-                .userAgentHeader("load-test")
+  val httpProtocol = http // 4
+    .baseUrl("https://apnews-int.appspot.com") // 5
+    .acceptHeader("text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8") // 6
+    .acceptLanguageHeader("en-US,en;q=0.5")
+    .acceptEncodingHeader("gzip, deflate")
+    .userAgentHeader("load-test")
 
-        val landing = scenario("Landing").exec(http("/").get("/"))
+  val scn = scenario("Landing") // 7
+    .exec(http("/") // 8
+      .get("/")) // 9
 
-        setUp(content.inject(
-                rampUsersPerSec(0) to(200) during(60 seconds),
-                constantUsersPerSec(200) during(20 minutes) randomized
-        ))
-        .protocols(web);
+  setUp(
+    scn.inject(
+      rampUsersPerSec(0) to 25 during (20 seconds), // 6
+      constantUsersPerSec(25) during (2 minutes) randomized, // 5
+    ).protocols(httpProtocol)
+  )
 }
